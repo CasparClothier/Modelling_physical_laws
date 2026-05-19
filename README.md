@@ -19,7 +19,24 @@ So the goals of this study were to:
 
 ## The Duffing Equation PINN
 
-The diagram below demonstrates how the PINN will be structured. 
+The Duffing equation is a non-linear second order ODE that models damped and driven oscillators.
 
-![PINN diagram](PINN diagram.jpg)
+$$
+\ddot{x} + \delta \dot{x} + \alpha x + \beta x^3 = \gamma \cos(\omega t)
+$$
+
+$\delta$ controls the degree of damping, $\alpha$ controls the linear stiffness, $\beta$ adds non linearity to the restoring force, $\gamma$ controls the amplitude of the periodic driving force, and $\omega$ is the angular frequency of the periodic driving force. By setting $\beta=\gamma=0$, it models simple harmonic motion.
+
+The training dataset for the PINN will consist of pairs $((f_{x_0},f_{y_0},z_0,v_0),(f_{x_1},f_{y_1},z_1,v_1))$. The system will be propogated via the following relations:
+
+1. $f_{x_1} = cos(\omega t) f_{x_0}+sin(\omega t) f_{y_0}$
+2. $f_{y_1} = -sin(\omega t)f_{x_0}+cos(\omega t)f_{y_0}$
+3. $v_1=v_0+dt(-\alpha z_0 - \delta v_0-\beta z_0^3 +\gamma cos(\omega t))$
+4. $z_1 = z_0+v_1 dt$
+
+
+The diagram below demonstrates how the PINN will be structured. The red, blue, green, and white layers of this network represent steps 1, 2, 3, and 4 respectively.
+
+<img width="955" height="971" alt="PINN diagram" src="https://github.com/user-attachments/assets/a62d16bd-b859-49dc-ae36-92e04ba645de" />
+
 
