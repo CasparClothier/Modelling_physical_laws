@@ -21,3 +21,5 @@ So the goals of this study were to:
 
 The diagram below demonstrates how the PINN will be structured. 
 
+![PINN diagram](PINN diagram.jpg)
+
