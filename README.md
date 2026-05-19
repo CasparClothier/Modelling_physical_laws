@@ -19,5 +19,5 @@ So the goals of this study were to:
 
 ## The Duffing Equation PINN
 
-
+The diagram below demonstrates how the PINN will be structured. 
 
